@@ -1,6 +1,13 @@
-from os import system, name
+from os import system
 import sys
 import time
+
+
+class Location:
+    def __init__(self, name, coords, paths = ['N', 'E', 'S', 'W']) -> None:
+        self.name: str = name
+        self.coords: tuple = coords
+        self.paths: list = paths
 
 
 class Player:
