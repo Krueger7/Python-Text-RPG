@@ -24,32 +24,51 @@ class Player:
                       'Charisma':1,      #opens npc options
                       'Luck':1,          #influence RNG and Charisma proc
                       'Max':10}          #maximum stat level
+        self.stat_points = 0
 
     def level_up(self):
-        choice = ' '
-        keys, vals = [], []
-        for key, val in self.stats.items():
-            keys.append(key)
-            vals.append(val)
-        print(self.stats)
-        while choice not in keys:
-            try:
-                choice = str(input('Which stat to upgrade: '))
-                if self.stats[choice] != 10:
-                    self.stats[choice] += 1
-            except:
-                print('Stat is maxed out')
+        if self.stat_points == 0:
+            return
 
+        stat_names = ['Strength','Agility','Dexterity','Intelligence','Will','Charisma','Luck']
+        maxed_stats = []
+        for name in stat_names:
+            if self.stats[name] == 10:
+                write(name + " (MAX)")
+                maxed_stats.append(name)
+            else:
+                write(name)
+
+        time.sleep(1)
+        while True:
+            choice = str(input("Which stat to upgrade: "))
+            if choice == "Return":
+                break
+
+            while choice not in stat_names or choice in maxed_stats:
+                choice = str(input("Which stat to upgrade: "))
+            
+            amt = int(input(f"How many points to use ({self.stat_points})"))
+            while amt > self.stat_points:
+                amt = int(input(f"How many points to use ({self.stat_points})"))
+
+            if (self.stats[choice] + amt) <= 10:
+                self.stats[choice] += amt
+                break
+            else:
+                write("Amount chosen is too high for stat \'{choice}\'")
 
     def lvl_check(self):
+        """_summary_
+        """
         if self.level['Current'] >= self.level['Max']:
             self.level['Level'] += 1
             self.level['Current'] -= self.level['Max']
             self.level['Max'] = self.level['Level'] * 100
-            self.level_up()
-
 
     def hp_check(self):
+        """Checks if the use of a healing potion has over-healed the player
+        """
         if self.hp['HP'] > self.hp['Max']:
             self.hp['HP'] = self.hp['Max']
 
@@ -63,7 +82,7 @@ Race: {self.race}
 Level: {self.level['Level']} ({self.level['Current']}/{self.level['Max']})
 HP: {self.hp['HP']}/{self.hp['Max']}
 Stats:
-    {keys[0]}: {vals[0]}
+    {keys[0]}: {vals[0]}   Points: {self.stat_points}
     {keys[1]}: {vals[1]}
     {keys[2]}: {vals[2]}
     {keys[3]}: {vals[3]}
@@ -92,3 +111,4 @@ def write(text):
         if char in ',.!?':
             x = 0.3
         time.sleep(x)
+    print()
