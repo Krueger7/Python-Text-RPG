@@ -16,14 +16,14 @@ class Player:
         self.race = race
         self.level = {'Level':1, 'Current':0, 'Max':100}
         self.hp = {'HP':10, 'Max':10}
-        self.stats = {'Strength':1, 
-                      'Agility':1,
-                      'Dexterity':1,
-                      'Intelligence':1,
-                      'Will':1,
-                      'Charisma':1,
-                      'Luck':1,
-                      'Max':10}
+        self.stats = {'Strength':1,      #attack dmg
+                      'Agility':1,       #evasion
+                      'Dexterity':1,     #health
+                      'Intelligence':1,  #opens encounter options
+                      'Will':1,          #resist mental attacks
+                      'Charisma':1,      #opens npc options
+                      'Luck':1,          #influence RNG and Charisma proc
+                      'Max':10}          #maximum stat level
 
     def level_up(self):
         choice = ' '
