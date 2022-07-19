@@ -74,10 +74,17 @@ Stats:
 
 
 def clear():
+    """Clears terminal window of any written text.
+    """
     system('cls')
 
 
 def write(text):
+    """Writes given text to screen formatted neatly.
+
+    Args:
+        text (string): A string to write to screen.
+    """
     for char in text:
         sys.stdout.write(char)
         sys.stdout.flush()
