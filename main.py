@@ -1,24 +1,13 @@
-from os import system, name
-import sys
-import time
-
-
-def clear():
-    system('cls')
-
-
-def write(text):
-    for char in text:
-        sys.stdout.write(char)
-        sys.stdout.flush()
-        x = 0.04
-        if char in ',.!?':
-            x = 0.3
-        time.sleep(x)
+from tools import *
 
 
 def main():
-    write("Hello, World!")
+    name = input('Name: ')
+    race = ''
+    while race not in ['Human', 'Elf', 'Dwarf']:
+        race = input('Race (Human, Elf, Dwarf): ')
+    playerIG = Player(name, race)
+    print(playerIG)
 
 
 if __name__ == "__main__":
