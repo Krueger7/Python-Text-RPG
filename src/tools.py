@@ -14,7 +14,7 @@ class Player:
     def __init__(self, name, race) -> None:
         self.name = name
         self.race = race
-        self.level = {'Level':1, 'Current':0, 'Max':100}
+        self.level = {'Level':1, 'Current':0, 'Max':64} #Level 64 is enough to max out all stats
         self.hp = {'HP':10, 'Max':10}
         self.stats = {'Strength':1,      #attack dmg
                       'Agility':1,       #evasion
@@ -27,6 +27,8 @@ class Player:
         self.stat_points = 0
 
     def level_up(self):
+        """Runs process of selecting stat and allocating stat points to player stat
+        """
         if self.stat_points == 0:
             return
 
@@ -59,12 +61,13 @@ class Player:
                 write("Amount chosen is too high for stat \'{choice}\'")
 
     def lvl_check(self):
-        """_summary_
+        """Checks if xp gained is enough to level up
         """
         if self.level['Current'] >= self.level['Max']:
             self.level['Level'] += 1
             self.level['Current'] -= self.level['Max']
             self.level['Max'] = self.level['Level'] * 100
+            self.stat_points += 1
 
     def hp_check(self):
         """Checks if the use of a healing potion has over-healed the player
