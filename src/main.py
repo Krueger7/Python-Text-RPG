@@ -9,6 +9,9 @@ def main():
     playerIG = Player(name, race)
     print(playerIG)
 
+    region = Map()
+    print(region)
+
 
 if __name__ == "__main__":
     main()

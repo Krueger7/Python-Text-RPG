@@ -9,6 +9,28 @@ class Location:
         self.coords: tuple = coords
         self.paths: list = paths
 
+    def __str__(self):
+        return self.name[0]
+
+
+class Map:
+    def fill_region(self):
+        for i in range(16):
+            self.region.append([Location('Forest', (i, j)) for j in range(16)])
+
+        for i in range(16):
+            self.abbr_region.append([str(self.region[i][j].name[0]) for j in range(16)])
+
+    def __init__(self):
+        self.region = []
+        self.abbr_region = []
+        self.fill_region()
+
+    def __str__(self):
+        for i in range(15):
+            print(self.abbr_region[i])
+        return str(self.abbr_region[15])
+
 
 class Player:
     def __init__(self, name, race) -> None:
